@@ -61,7 +61,10 @@ pub fn build(b: *std.Build) void {
         "lib/stm32/l0/i2c.c",
         "lib/cm3/systick.c",
     };
-    lib.addCSourceFiles(&source_files, &[_][]const u8{"-std=c99"});
+    lib.addCSourceFiles(.{
+        .files = &source_files,
+        .flags = &[_][]const u8{"-std=c99"},
+    });
     lib.addIncludePath(.{ .path = "include" });
 
     // This makes the ./include/libopencm3 directory available to anyone using the library.
